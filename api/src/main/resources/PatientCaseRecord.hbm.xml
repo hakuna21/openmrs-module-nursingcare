@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="PatientCaseRecord"
+		table="nursingcare_patient_case_record">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<set name="patientMovements" table="nursingcare_patient_movement" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="patient_case_record_id" not-null="true" />
+            </key>
+            <one-to-many class="org.openmrs.module.nursingkardex.PatientMovement" />
+        </set>
+		<property name="caseNumber" type="java.lang.String" column="case_number" length="50" />	
+		<many-to-one name="patient" class="org.openmrs.Patient" not-null="true" column="patient_id"/>
+		<many-to-one name="physicianInCharge" class="org.openmrs.module.nursingkardex.Physician" not-null="true" column="physician_in_charge_id"/>
+		<many-to-one name="latestPatientMovement" class="org.openmrs.module.nursingkardex.PatientMovement" not-null="false" column="latest_patient_movement_id"/>
+		<property name="datetimeAdmitted" type="java.util.Date" column="datetime_admitted" />
+	    <property name="admittingDiagnosis" type="java.lang.String" column="admitting_diagnosis" length="55" />
+		<property name="workingImpression" type="java.lang.String" column="working_impression" length="55" />
+		<property name="operationRemarks" type="java.lang.String" column="operation_remarks" length="55" />
+		<property name="finalDiagnosis" type="java.lang.String" column="final_diagnosis" length="55" />
+		<property name="mssClassification" type="java.lang.String" column="medical_social_service_classification" length="55" />
+		<property name="mssCardNumber" type="java.lang.String" column="medical_social_service_card_number" length="55" />
+		<property name="datetimeDischarged" type="java.util.Date" column="datetime_discharged" length="55" />	
+	</class>
+
+</hibernate-mapping>

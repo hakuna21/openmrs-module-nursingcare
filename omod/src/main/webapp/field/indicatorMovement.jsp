@@ -1,0 +1,42 @@
+ <table class="indicator" border="1">
+	<tr>
+		<th>Indicator</th>
+		<th>Date/<br/>Shift</th>	
+	</tr>
+	<tr>
+		<td>Admission</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Trans-in</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Trans-out</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Discharged</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>HAA/Home Per Request</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Absconded</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Mortality</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Direct Rooming-in</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>TOTAL</td>
+		<td></td>
+	</tr>
+</table>

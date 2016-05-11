@@ -1,0 +1,77 @@
+    <!-- Elimination -->
+
+<table border="1">
+	<tr>
+		<th>Indicator</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>
+		<th>Date/<br/>Shift</th>		
+	</tr>
+	<tr>
+		<td>Bowel/Colostomy/<br/>Ileostomy</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Foley catheter</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Peritoneal dialysis</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Hemodialysis</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Others</td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+	</tr>
+</table>
+

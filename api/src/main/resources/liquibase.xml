@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+     
+    <changeSet author="ceblano" id="20150403-3a">    
+    	<comment>Bed table</comment>
+        <createTable tableName="nursingcare_bed">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="room_name" type="varchar(50)" />
+			<column name="location_id" type="int" />
+            <column name="is_occupied" type="int" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-4a">    
+    	<comment>Physician Department table</comment>
+        <createTable tableName="nursingcare_physician_department">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="name" type="varchar(20)" />
+            <column name="description" type="varchar(25)" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-5">    
+    	<comment>Physician table</comment>
+        <createTable tableName="nursingcare_provider_physician">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="provider_id" type="int" />
+			<column name="physician_department_id" type="int" />
+			<column name="license_number" type="varchar(55)" />
+            <column name="position" type="varchar(25)" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-6b">    
+    	<comment>Patient Case Record table</comment>
+        <createTable tableName="nursingcare_patient_case_record">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="case_number" type="varchar(50)" />
+			<column name="patient_id" type="int" />
+			<column name="physician_in_charge_id" type="int" />
+			<column name="latest_patient_movement_id" type="int" />
+			<column name="datetime_admitted" type="DATETIME" />
+			<column name="admitting_diagnosis" type="varchar(55)" />
+			<column name="working_impression" type="varchar(55)" />
+			<column name="operation_remarks" type="varchar(55)" />
+			<column name="final_diagnosis" type="varchar(55)" />
+			<column name="medical_social_service_classification" type="varchar(55)" />
+			<column name="medical_social_service_card_number" type="varchar(55)" />
+            <column name="datetime_discharged" type="DATETIME" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-7b">    
+    	<comment>Patient Movement table</comment>
+        <createTable tableName="nursingcare_patient_movement">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="patient_case_record_id" type="int" />
+			<column name="encounter_id" type="int" />
+			<column name="bed_id" type="int" />
+			<column name="movement_datetime" type="datetime" />
+			<column name="movement_shift" type="varchar(30)" />
+			<column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="movements-addons-1">
+	    <addColumn tableName="nursingcare_patient_movement">
+	        <column name="previous_bed_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-8b">    
+    	<comment>Nurses table</comment>
+        <createTable tableName="nursingcare_provider_nurse">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="provider_id" type="int" />
+			<column name="location_id" type="int" />
+			<column name="license_number" type="varchar(55)" />
+            <column name="position" type="varchar(25)" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-9">    
+    	<comment>Problem Clasification table</comment>
+        <createTable tableName="nursingcare_problem_classification">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="name" type="varchar(150)" />
+			<column name="description" type="varchar(255)" />
+			<column name="domain" type="varchar(55)" />
+            <column name="source" type="varchar(25)" />
+            <column name="version" type="varchar(15)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20150403-10">    
+    	<comment>Shift Problem table</comment>
+        <createTable tableName="nursingcare_shift_problem">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="encounter_id" type="int" />
+			<column name="problem_id" type="int" />
+			<column name="date" type="datetime" />
+			<column name="shift" type="varchar(55)" />
+            <column name="problem_text" type="varchar(15)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="problem-addons-1">
+	    <addColumn tableName="nursingcare_shift_problem">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+	
+	<changeSet author="ceblano" id="problem-addons-2">
+	    <addColumn tableName="nursingcare_shift_problem">
+	        <column name="active_problem" type="int"/>
+	        <column name="creator_user_id" type="int"/>
+	        <column name="date_created" type="DATETIME" />
+	        <column name="date_stopped" type="DATETIME" />
+	    </addColumn>
+	</changeSet>
+
+
+
+    
+
+    <changeSet author="ceblano" id="20150403-12c">    
+    	<comment>Parenteral Order Infusion table</comment>
+        <createTable tableName="nursingcare_parenteral_order_infusion">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="order_id" type="int" />
+			<column name="encounter_id" type="int" />
+			<column name="parenteral_order_infusion_type" type="int" />
+			<column name="intravenous_fluid" type="varchar(45)" />
+			<column name="volume" type="varchar(10)" />
+			<column name="additive" type="varchar(255)" />
+			<column name="regulation" type="varchar(255)" />
+			<column name="anatomical_site" type="int" />
+			<column name="datetime_started" type="datetime" />
+			<column name="datetime_stopped" type="datetime" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="parenteral-addons-1">
+	    <addColumn tableName="nursingcare_parenteral_order_infusion">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+	
+	 <changeSet author="ceblano" id="parenteral-addons-2">
+	    <dropColumn tableName="nursingcare_parenteral_order_infusion" columnName="anatomical_site"/>
+	    <addColumn tableName="nursingcare_parenteral_order_infusion">
+	        <column name="anatomical_site" type="varchar(255)"/>
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-13c">    
+    	<comment>Oxygenation Order table</comment>
+        <createTable tableName="nursingcare_oxygenation_order">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="order_id" type="int" />
+			<column name="has_mechanical_ventilator" type="int" />
+			<column name="mechanical_ventilator_type" type="varchar(95)" />
+			<column name="encounter_id" type="int" />
+			<column name="flow_rate_liter_per_minute" type="int" />
+			<column name="mode" type="varchar(55)" />
+            <column name="tidal_volume" type="int" />
+            <column name="fio2_percent" type="int" />
+            <column name="pip" type="int" />
+            <column name="peep" type="int" />
+            <column name="ie_ratio" type="varchar(10)" />
+            <column name="ventilator_rate" type="int" />
+        </createTable>
+    </changeSet>
+    
+   	<changeSet author="ceblano" id="oxygenation-addons-1">
+	    <addColumn tableName="nursingcare_oxygenation_order">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-14d">    
+    	<comment>Operation table</comment>
+        <createTable tableName="nursingcare_operation">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="order_id" type="int" />
+			<column name="encounter_id" type="int" />
+			<column name="operation_name" type="varchar(45)" />
+			<column name="priority" type="varchar(45)" />
+            <column name="performing_physician_id" type="int" />
+            <column name="date_schedule" type="datetime" />
+            <column name="schedule_status" type="varchar(45)" />
+            <column name="operation_area" type="varchar(100)" />
+            <column name="scheduler_user_id" type="int" />
+            <column name="remarks" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="operation-addons-1">
+	    <addColumn tableName="nursingcare_operation">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-15d">
+        <createTable tableName="nursingcare_orders">
+            <column autoIncrement="true" name="order_id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+			<column name="uuid" type="char(38)" />
+            <column defaultValueNumeric="0" name="order_type_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="concept_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="encounter_id" type="int"/>
+            <column defaultValueNumeric="0" name="orderer" type="int"/>
+            <column defaultValueNumeric="0" name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="patient_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="care_setting" type="varchar(50)" />
+            <column name="urgency" type="varchar(50)" />
+            <column name="order_action" type="varchar(50)" />
+            <column name="instruction" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="order-1">
+	    <addColumn tableName="nursingcare_orders">
+	        <column name="date_stopped" type="datetime"/>
+	    </addColumn>
+	</changeSet>
+	
+	<changeSet author="ceblano" id="order-2">
+	    <addColumn tableName="nursingcare_orders">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-16d">    
+    	<comment>Procedure table</comment>
+        <createTable tableName="nursingcare_procedure">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="procedure_concept_id" type="int" />
+			<column name="order_id" type="int" />
+			<column name="encounter_id" type="int" />
+			<column name="procedure_name" type="varchar(45)" />
+			<column name="date_schedule" type="datetime" />
+			<column name="schedule_status" type="varchar(45)" />
+            <column name="remarks" type="varchar(255)" />
+            <column name="type" type="varchar(10)" />
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="procedure-addons-1">
+	    <addColumn tableName="nursingcare_procedure">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+    
+    
+    <changeSet author="ceblano" id="20150403-18c">    
+    	<comment>Parenteral Order Type table</comment>
+        <createTable tableName="nursingcare_parenteral_order_type">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="intravenous_fluid" type="varchar(45)" />
+			<column name="volume" type="varchar(10)" />
+			<column name="additive" type="varchar(255)" />
+			<column name="regulation" type="varchar(255)" />
+		</createTable>
+    </changeSet>
+    
+    <changeSet author="ceblano" id="20160321-19A">    
+    	<comment>Nursing Care Ward Aggregate table</comment>
+        <createTable tableName="nursingcare_ward_aggregate">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="concept_id" type="int"/>
+			<column name="tally" type="int"/>
+			<column name="date_created" type="DATETIME" />
+			<column name="location_id" type="int"/>
+			<column name="remarks" type="varchar(255)" />
+			<column name="date_voided" type="DATETIME" />
+			<column name="creator" type="int"/>
+		</createTable>
+    </changeSet>
+    
+    
+    
+ 
+    <changeSet author="ceblano" id="20150403-17d">    
+    	<comment>Level of Care table</comment>
+        <createTable tableName="nursingcare_level_of_care">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="encounter_id" type="int" />
+			<column name="level_of_care" type="int" />
+        </createTable>
+    </changeSet>
+    
+    
+    <changeSet author="ceblano" id="levelofcare-addons-1d">
+	    <addColumn tableName="nursingcare_level_of_care">
+	        <column name="patient_case_record_id" type="int"/>
+	    </addColumn>
+	</changeSet>
+	
+	<changeSet author="ceblano" id="levelofcare-addons-2d">
+	    <addColumn tableName="nursingcare_level_of_care">
+	        <column name="creator" type="int"/>
+	        <column name="date_created" type="DATETIME" />
+	    </addColumn>
+	</changeSet>
+    
+    <changeSet author="ceblano" id="20150403-112g">    
+    	<comment>Diet Order Requirements table</comment>
+        <createTable tableName="nursingcare_diet_order_requirement">
+            <column autoIncrement="true" name="id" type="int">
+				<constraints primaryKey="true" nullable="false"/>
+			</column>
+			<column name="uuid" type="char(38)" /> 	
+			<column name="encounter_id" type="int" />
+			<column name="calories" type="varchar(30)" />
+			<column name="carbohydrates" type="varchar(45)" />
+			<column name="protein" type="varchar(45)" />
+			<column name="fats" type="varchar(45)" />
+            <column name="sodium" type="varchar(45)" />
+            <column name="fluid_restriction_ml" type="int" />
+            <column name="route" type="varchar(30)" />
+            <column name="order_id" type="int"/>
+            <column name="patient_case_record_id" type="int"/>
+            <column name="fluid_requirement_ml_per_kg" type="int" />
+            <column name="sterile_water_ml" type="int" />
+            <column name="sodium_chloride" type="varchar(255)" />
+            <column name="amino_acids" type="varchar(255)" />
+            <column name="dextrose" type="varchar(255)" />
+            <column name="calcium_gluconate" type="varchar(255)" />
+            <column name="magnesium_sulfate" type="varchar(255)" />
+            <column name="multivitamins" type="varchar(255)" />
+            <column name="lipids" type="varchar(255)" />
+            <column name="insulin" type="varchar(255)" />
+            <column name="tpn" type="varchar(450)" />
+	        <column name="total_volume" type="int"/>
+	        <column name="requested_by" type="varchar(255)"/>
+	        <column name="order_type" type="varchar(45)"/>
+	        <column name="indication" type="varchar(255)"/>
+	        <column name="duration" type="varchar(255)"/>
+	    </createTable>
+    </changeSet>
+    
+</databaseChangeLog>
+
+
+ 

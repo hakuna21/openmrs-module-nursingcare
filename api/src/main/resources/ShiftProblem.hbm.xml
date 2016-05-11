@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="ShiftProblem"
+		table="nursingcare_shift_problem">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>	
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+		<many-to-one name="problemClassification" class="org.openmrs.module.nursingkardex.ProblemClassification" not-null="false" column="problem_id"/>
+		<property name="date" type="java.util.Date" column="date" />
+		<property name="shift" type="java.lang.String" column="shift" length="55" 	/>
+        <property name="problemText" type="java.lang.String" column="problem_text" length="55" /> 
+        <property name="activeProblem" type="java.lang.Integer" column="active_problem" />
+        <many-to-one name="creator" class="org.openmrs.User" column="creator_user_id"/>
+		<property name="dateCreated" type="java.util.Date" column="date_created" length="19"/>	        
+        <property name="dateStopped" type="java.util.Date" column="date_stopped" length="19"/>	
+	</class>
+	
+</hibernate-mapping>

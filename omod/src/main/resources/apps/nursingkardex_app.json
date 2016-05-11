@@ -1,0 +1,16 @@
+[
+    {
+        "id": "${project.parent.artifactId}.app",
+        "description": "Text description of my app, not shown to regular user",
+        "extensions": [
+            {
+                "id": "${project.parent.artifactId}.appId",
+                "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+                "type": "link",
+                "label": "Nursing Kardex",
+                "url": "module/nursingkardex/nursingKardex.page",
+                "icon": "icon-glass"
+            }
+        ]
+    }
+]

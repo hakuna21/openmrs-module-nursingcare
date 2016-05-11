@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="OxygenationOrder"
+		table="nursingcare_oxygenation_order">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>
+		<many-to-one name="order" class="org.openmrs.module.nursingkardex.NursingCareOrder" not-null="true" column="order_id"/>
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+		<property name="hasMechanicalVentilator" type="java.lang.Integer" column="has_mechanical_ventilator" />
+		<property name="mechanicalVentilatorType" type="java.lang.String" column="mechanical_ventilator_type" length="95" />
+		<property name="flowRateLiterPerMinute" type="java.lang.Integer" column="flow_rate_liter_per_minute" />
+		<property name="mode" type="java.lang.String" column="mode" length="55" />
+		<property name="tidalVolume" type="java.lang.Integer" column="tidal_volume" />
+		<property name="fio2Percent" type="java.lang.Integer" column="fio2_percent" />
+		<property name="pip" type="java.lang.Integer" column="pip" />
+		<property name="peep" type="java.lang.Integer" column="peep" />
+		<property name="ieRatio" type="java.lang.String" column="ie_ratio" length="10" />
+		<property name="ventilatorRate" type="java.lang.Integer" column="ventilator_rate" />
+    </class>
+
+</hibernate-mapping>

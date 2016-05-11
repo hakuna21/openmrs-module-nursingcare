@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="LevelOfCare"
+		table="nursingcare_level_of_care">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+		<property name="levelOfCare" type="java.lang.Integer" column="level_of_care" />
+		<many-to-one name="creator" class="org.openmrs.User" not-null="true" column="creator"/>
+		<property name="dateCreated" type="java.util.Date" column="date_created" not-null="true"/>
+    </class>
+
+</hibernate-mapping>

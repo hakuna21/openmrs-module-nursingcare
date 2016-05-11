@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="DietOrderRequirement" 
+		table="nursingcare_diet_order_requirement">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>
+		<many-to-one name="order" class="org.openmrs.module.nursingkardex.NursingCareOrder" not-null="true" column="order_id"/>
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+        <property name="calories" type="java.lang.String" column="calories"  length="45" />
+		<property name="carbohydrates" type="java.lang.String" column="carbohydrates" length="45" />
+		<property name="protein" type="java.lang.String" column="protein" length="45" />
+		<property name="fats" type="java.lang.String" column="fats" length="45" />
+		<property name="sodium" type="java.lang.String" column="sodium" length="45" />
+		<property name="fluidRestrictionMl" type="java.lang.Integer" column="fluid_restriction_ml" />
+		<property name="route" type="java.lang.String" column="route" length="30" />
+		<property name="fluidRequirementMlPerKg" type="java.lang.Integer" column="fluid_requirement_ml_per_kg" />
+		<property name="sterileWaterMl" type="java.lang.Integer" column="sterile_water_ml" />
+		<property name="sodiumChloride" type="java.lang.String" column="sodium_chloride" length="255" />
+		<property name="aminoAcids" type="java.lang.String" column="amino_acids" length="255" />
+		<property name="dextrose" type="java.lang.String" column="dextrose" length="255" />
+		<property name="calciumGluconate" type="java.lang.String" column="calcium_gluconate" length="255" />
+		<property name="magnesiumSulfate" type="java.lang.String" column="magnesium_sulfate" length="255" />
+		<property name="multivitamins" type="java.lang.String" column="multivitamins" length="255" />
+		<property name="lipids" type="java.lang.String" column="lipids" length="255" />
+		<property name="insulin" type="java.lang.String" column="insulin" length="255" />
+		<property name="totalVolume" type="java.lang.Integer" column="total_volume" />
+		<property name="requestedBy" type="java.lang.String" column="requested_by" length="255" />
+		<property name="orderType" type="java.lang.String" column="order_type" length="45" />
+		<property name="indication" type="java.lang.String" column="indication" length="255" />
+		<property name="duration" type="java.lang.String" column="duration" length="255" />
+    </class>
+
+</hibernate-mapping>

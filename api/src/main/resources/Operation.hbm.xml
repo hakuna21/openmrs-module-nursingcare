@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="Operation"
+		table="nursingcare_operation">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>
+		<many-to-one name="order" class="org.openmrs.module.nursingkardex.NursingCareOrder" not-null="true" column="order_id"/>
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+		<property name="operationName" type="java.lang.String" column="operation_name" length="45" />
+		<property name="priority" type="java.lang.String" column="priority" length="45" />
+		<many-to-one name="performingPhysician" class="org.openmrs.module.nursingkardex.Physician" column="performing_physician_id"/>
+		<property name="dateSchedule" type="java.util.Date" column="date_schedule" length="19"/>	
+		<property name="scheduleStatus" type="java.lang.String" column="schedule_status" length="45" />
+		<property name="operationArea" type="java.lang.String" column="operation_area" length="45" />
+		<many-to-one name="schedulerUser" class="org.openmrs.User" column="scheduler_user_id"/>
+		<property name="remarks" type="java.lang.String" column="remarks" length="255" />
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="org.openmrs.module.nursingkardex">
+
+	<class name="PatientMovement"
+		table="nursingcare_patient_movement">
+		<id name="id" type="int" column="id" unsaved-value="0">
+			<generator class="native" />
+		</id>
+		<discriminator column="id" insert="false" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
+		<many-to-one name="patientCaseRecord" class="org.openmrs.module.nursingkardex.PatientCaseRecord" not-null="true" column="patient_case_record_id"/>	
+		<many-to-one name="encounter" class="org.openmrs.Encounter" not-null="true" column="encounter_id"/>
+		<many-to-one name="bed" class="org.openmrs.module.nursingkardex.Bed" column="bed_id"/>
+		<many-to-one name="previousBed" class="org.openmrs.module.nursingkardex.Bed" column="previous_bed_id"/>
+		<property name="movementDatetime" type="java.util.Date" column="movement_datetime" /> 
+		<property name="movementShift" type="java.lang.String" column="movement_shift" length="30" /> 
+		<property name="remarks" type="java.lang.String" column="remarks" length="255" /> 
+	</class>
+	
+</hibernate-mapping>

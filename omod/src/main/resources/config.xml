@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+
+	<!-- Module Properties -->
+	<id>${project.parent.artifactId}</id>
+	<name>${project.parent.name}</name>
+	<version>${project.parent.version}</version>
+	<package>${project.parent.groupId}.${project.parent.artifactId}</package>
+	<author>hakuna21</author>
+	<description>
+		${project.parent.description}
+	</description>
+	<updateURL>https://modules.openmrs.org/modules/download/${project.parent.artifactId}/update.rdf</updateURL>
+	<require_version>${openMRSVersion}</require_version>
+	<!-- / Module Properties -->
+
+	
+	<!-- Required Modules -->
+	<require_modules>
+																											
+		<require_module version="3.0">
+			org.openmrs.module.uiframework
+		</require_module>
+																											
+		<require_module version="2.0">
+			org.openmrs.module.appframework
+		</require_module>
+																											
+		<require_module version="1.0">
+			org.openmrs.module.uicommons
+		</require_module>
+																											
+		<require_module version="1.0">
+			org.openmrs.module.appui
+		</require_module>
+			
+	</require_modules>
+	<!-- / Required Modules -->
+	
+	<!-- Module Activator -->
+	<activator>${project.parent.groupId}.${project.parent.artifactId}.NursingKardexActivator</activator>
+	
+	
+	<!-- Adds link to admin page -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
+	</extension>
+	
+	<!-- Maps hibernate file's, if present -->
+	<mappingFiles>
+				
+		Tribe.hbm.xml
+		Bed.hbm.xml
+		PhysicianDepartment.hbm.xml
+		Physician.hbm.xml
+		PatientCaseRecord.hbm.xml
+		PatientMovement.hbm.xml
+		Nurse.hbm.xml
+		ProblemClassification.hbm.xml
+		ShiftProblem.hbm.xml
+		NursingCareOrder.hbm.xml
+		DietOrderRequirement.hbm.xml
+		ParenteralOrderInfusion.hbm.xml
+		OxygenationOrder.hbm.xml
+		Operation.hbm.xml
+		Procedure.hbm.xml
+		LevelOfCare.hbm.xml
+		ParenteralOrderType.hbm.xml
+		WardAggregate.hbm.xml
+				
+	</mappingFiles>
+
+	<!-- Internationalization -->
+	<!-- All message codes should start with ${project.parent.artifactId}. -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+
+</module>
+
